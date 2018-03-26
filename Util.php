@@ -25,6 +25,31 @@ class Util {
     }
 
 
+     /**
+     * 
+     *  Check the file and/or size duplications in multidimensional arrays
+     * 
+     * @param array $data
+     * @return array
+     */
+    public function checkFileDuplications(array $data): array{
+        
+        $result = array();
+        foreach ($data as $current_key => $current_array) {
+            foreach ($data as $search_key => $search_array) {
+                if ( $search_array['filename'] == $current_array['filename'] ) {
+                    if ($search_key != $current_key) {
+                        if( $current_array['size'] == $search_array['size'] ){
+                            $return = array("errorType" => "Duplicate_File_And_Size", "filename" => $current_array['filename'], "dir" => $current_array['dir']);
+                        }else {
+                            $return = array("errorType" => "Duplicate_File", "filename" => $current_array['filename'], "dir" => $current_array['dir']);
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
+    }
 
 
     /**
