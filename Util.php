@@ -4,7 +4,29 @@
 class Util {
     
     
-    
+    /**
+     * 
+     * Read big files line by line to avoid memory problems
+     * 
+     * @param string $dir
+     * @return string
+     */
+    public function readFileLineByLine(string $dir): string{
+        $buffer = "";
+        $handle = fopen($dir, "r");
+        if ($handle) {
+            while (!feof($handle)) {
+                $buffer .= stream_get_line($handle, 4096);
+            }
+            fclose($handle);
+        }
+        
+        return $buffer;
+    }
+
+
+
+
     /**
      * 
      * Check windows and linux directorys
