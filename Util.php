@@ -3,6 +3,24 @@
 
 class Util {
     
+    /**
+     * search in a multi array based on the value and the field name and then remove it by the key
+     * 
+     */
+    public function checkValueInArrayByKey() {
+        
+        $myarray = array(
+            "0" => array("whichField" => "ssss", "whichFieldNot" => "sssssa"), 
+            "1" => array("whichField" => "bbbb", "whichFieldNot" => "bbbbx"), 
+            "2" => array("whichField" => "whatIneed", "whichFieldNot" => "eeee") 
+        );
+        //result : 2
+        if(array_search('whatIneed', array_column($myarray, 'whichField')) !== false) {
+            $key = array_search('whatIneed', array_column($myarray, 'whichField'));
+            unset($myarray[$key]);
+        }
+    }
+    
     
     /**
      * 
@@ -24,6 +42,17 @@ class Util {
         return $buffer;
     }
 
+    /**
+     * 
+     * Clean the string
+     * 
+     * @param type $string
+     * @return string
+     */
+    function clean($string): string {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+    }
 
      /**
      * 
